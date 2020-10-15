@@ -50,23 +50,39 @@ public class UsuarioController {
         usuarioView.getBtnGuardar().addActionListener((ActionEvent e) -> {
             guardarUsuario();
         });
+        usuarioView.getBtnLimpiar().addActionListener((ActionEvent e) -> {
+            usuario = new Usuario();
+            initView();
+        });
     }
     
     /**
      * Se encarga de obtener los valores de los text field y pasarlos al modelo usuario
      */
     private void guardarUsuario(){
-        // Actualiza los atributos del modelo con los valores de las entradas de la vista
-        usuario.setNombre(usuarioView.getNombreTextField().getText().trim());
-        usuario.setApellido(usuarioView.getApellidoTextField().getText().trim());
-        usuario.setNick(usuarioView.getNickTextField().getText().trim());
-        usuario.setCorreo(usuarioView.getCorreoTextField().getText().trim());
+        String nombre = usuarioView.getNombreTextField().getText().trim();
+        String apellido = usuarioView.getApellidoTextField().getText().trim();
+        String nick = usuarioView.getNickTextField().getText().trim();
+        String correo = usuarioView.getCorreoTextField().getText().trim();
         
-        // Imprimir modelo y mostrar mensaje de guardado
-        System.out.println(usuario);
-        JOptionPane.showMessageDialog(null, "Usuario guardado!", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
-        
-        // Limpiar
-        usuarioView.limpiarTextFields();
+        if (!nombre.equals("") && !apellido.equals("") && !nick.equals("") && !correo.equals("")){
+            // Actualiza los atributos del modelo con los valores de las entradas de la vista
+            usuario.setNombre(nombre);
+            usuario.setApellido(apellido);
+            usuario.setNick(nick);
+            usuario.setCorreo(correo);
+            
+            // Imprimir modelo y mostrar mensaje de guardado
+            System.out.println(usuario);
+            JOptionPane.showMessageDialog(null, 
+                "Nombre: " + usuario.getNombre() + "\n" +
+                "Apellido: " + usuario.getApellido() + "\n" +
+                "Nick: " + usuario.getNick() + "\n" +
+                "Correo: " + usuario.getCorreo(),
+                "Guardado!",
+                JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Es necesario completar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }

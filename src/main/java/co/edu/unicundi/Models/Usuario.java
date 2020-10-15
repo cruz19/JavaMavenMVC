@@ -41,6 +41,7 @@ public class Usuario {
      * Constructor vacío (requisito de un Java Bean)
      */
     public Usuario(){
+        this.nombre = this.apellido = this.nick = this.correo = "";
     }
 
     /**
@@ -107,6 +108,10 @@ public class Usuario {
         this.correo = correo;
     }
 
+    /***
+     * Método sobrescrito de la clase Object para mostrar la información del usuario
+     * @return String
+     */
     @Override
     public String toString() {
         return "Usuario{" + "nombre=" + nombre + ", apellido=" + apellido + ", nick=" + nick + ", correo=" + correo + '}';
